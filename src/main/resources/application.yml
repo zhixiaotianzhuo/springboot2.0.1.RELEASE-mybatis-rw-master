@@ -1,0 +1,109 @@
+server:
+    port: 8090
+spring:
+    profiles:
+        active: dev
+
+---
+
+spring:
+    profiles: dev
+    datasource:
+        master:
+            jdbcurl: jdbc:mysql://localhost:3306/v-master?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: 1233211234567
+            driver-class-name: com.mysql.jdbc.Driver
+        slave:
+            url: jdbc:mysql://localhost:3306/v-slave?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: 1233211234567
+            driver-class-name: com.mysql.jdbc.Driver
+        read: get,select,count,list,query,find
+        write: add,create,update,delete,remove,insert
+
+    thymeleaf:
+        cache: false #关闭缓存
+        prefix: classpath:/templates/
+        #为了避免出现关于HTML 5模板模式被弃用的警告消息，并且正在使用HTML模板模
+
+        #thymeleaf的配置文件说明
+        #spring.thymeleaf.cache = true ＃启用模板缓存。
+        #spring.thymeleaf.check-template = true ＃在呈现模板之前检查模板是否存在。
+        #spring.thymeleaf.check-template-location = true ＃检查模板位置是否存在。
+        #spring.thymeleaf.content-type = text / html ＃Content-Type值。
+        #spring.thymeleaf.enabled = true ＃启用MVC Thymeleaf视图分辨率。
+        #spring.thymeleaf.encoding = UTF-8 ＃模板编码。
+        #spring.thymeleaf.excluded-view-names = ＃应该从解决方案中排除的视图名称的逗号分隔列表。
+        #spring.thymeleaf.mode = HTML5 ＃应用于模板的模板模式。另请参见StandardTemplateModeHandlers。
+        #spring.thymeleaf.prefix = classpath：/ templates / ＃在构建URL时预先查看名称的前缀。
+        #spring.thymeleaf.suffix = .html ＃构建URL时附加到查看名称的后缀。
+        #spring.thymeleaf.template-resolver-order = ＃链中模板解析器的顺序。
+        #spring.thymeleaf.view-names = ＃可以解析的视图名称的逗号分隔列表。/ templates / ＃在构建URL时先查看名称的前缀。
+        #spring.thymeleaf.suffix = .html ＃构建URL时附加到查看名称的后缀。
+        #spring.thymeleaf.template-resolver-order = ＃链中模板解析器的顺序。
+        #spring.thymeleaf.view-names = ＃可以解析的视图名称的逗号分隔列表。/ templates / ＃在构建URL时先查看名称的前缀。
+        #spring.thymeleaf.suffix = .html ＃构建URL时附加到查看名称的后缀。
+        #spring.thymeleaf.template-resolver-order = ＃链中模板解析器的顺序。
+        #spring.thymeleaf.view-names = ＃可以解析的视图名称的逗号分隔列表。
+
+mybatis:
+   type-aliases-package: com.hqs.springboot.entity
+   mapperLocations: classpath:mapper/*.xml  #指定*Mapper.xml的位置
+   configLocation: classpath:/mybatis-config.xml
+mapper:
+    mappers:  com.hqs.springboot.mapper
+    not-empty: false
+    identity: MYSQL
+
+# Druid AOP config
+aop:
+    proxy-target-class: true
+logging:
+    config: classpath:logback.xml
+    #path: d:/logs
+#    level:
+#        root:
+#            WARN
+
+
+
+---
+
+profiles: prod
+datasource:
+    datasource:
+            master:
+                jdbcurl: jdbc:mysql://localhost:3306/v-master?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+                username: root
+                password: 1233211234567
+                driver-class-name: com.mysql.jdbc.Driver
+            slave:
+                url: jdbc:mysql://localhost:3306/v-slave?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+                username: root
+                password: 1233211234567
+                driver-class-name: com.mysql.jdbc.Driver
+            read: get,select,count,list,query,find
+            write: add,create,update,delete,remove,insert
+app:
+    name: springboot2.0.1.RELEASE-mybatis-rw
+
+mybatis:
+   type-aliases-package: com.hqs.springboot.entity
+   mapperLocations: classpath:mapper/*.xml  #指定*Mapper.xml的位置
+   configLocation: classpath:/mybatis-config.xml
+mapper:
+    mappers:  com.hqs.springboot.mapper
+    not-empty: false
+    identity: MYSQL
+
+# Druid AOP config
+aop:
+    proxy-target-class: true
+logging:
+    config: classpath:logback.xml
+    #path: d:/logs
+#    level:
+#        root:
+#            WARN
+

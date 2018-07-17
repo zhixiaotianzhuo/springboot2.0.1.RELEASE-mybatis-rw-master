@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	 <meta content="text/html;charset=UTF-8"/>
+  	 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+  </head>
+  <body>
+  
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">访问model</h3>
+    </div>
+    <div class="panel-body">
+        	<span th:text="${ttt.name}"></span>
+    </div>
+  </div>
+  
+  <div th:if="${not #lists.isEmpty(ts)}">
+	  <div class="panel panel-primary">
+	    <div class="panel-heading">
+	        <h3 class="panel-title">列表</h3>
+	    </div>
+	    <div class="panel-body">
+	        <ul class="list-group">
+				<li class="list-group-item" th:each="t:${ts}">
+				    <span th:text="${t.name}"></span>
+				   	<span th:text="${t.note}"></span>
+				   	<button class="btn" th:onclick="'getName(\'' + ${t.name} + '\');'">获得名字</button>
+				</li>
+	        </ul>
+	    </div>
+	 </div>
+ </div>
+
+  <!-- jQuery Version 1.11.0 -->
+  <script th:src="@{/js/jquery-1.11.0.js}" type="text/javascript" th:inline="javascript"></script><!-- 2 -->
+  <!-- Bootstrap Core JavaScript -->
+  <script th:src="@{/bootstrap/js/bootstrap.min.js}" type="text/javascript" th:inline="javascript"></script><!-- 2 -->
+
+  <script th:inline="javascript">
+  	var single = [[${ttt}]];
+  	console.log(single.name+"/"+single.note)
+  	
+  	function getName(name){
+  		console.log(name);
+  	}
+  </script>
+  
+  </body>
+ </html>
