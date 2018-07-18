@@ -1,4 +1,4 @@
-package com.hqs.springboot.beans;
+package com.hqs.springboot.constants;
 
 /**
  * 列出数据源类型

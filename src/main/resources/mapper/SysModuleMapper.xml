@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hqs.springboot.mapper.SysModuleMapper">
+
+    <insert id="insert" parameterType="com.hqs.springboot.entity.SysModule">
+        INSERT INTO sys_module (
+        id,
+        sys_second_nav_id,
+        name,
+        code_name
+        )
+        VALUES (
+        #{id,jdbcType=BIGINT},
+        #{sysSecondNavId,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
+        #{codeName,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--<select id="searchByUserId" parameterType="long" resultType="com.hqs.springboot.entity.SysModule">-->
+        <!--SELECT-->
+        <!--t1.code_name-->
+        <!--FROM-->
+        <!--sys_module t1-->
+        <!--INNER JOIN sys_role_module_r t2 ON t1.id = t2.sys_module_id-->
+        <!--INNER JOIN sys_role t3 ON t2.sys_role_id = t3.id-->
+        <!--INNER JOIN sys_user_role_r t4 ON t4.sys_role_id = t3.id-->
+        <!--INNER JOIN sys_user t5 ON t5.id = t4.sys_user_id-->
+        <!--WHERE t5.id = #{userId};-->
+    <!--</select>-->
+
+
+    <select id="searchById" parameterType="long" resultType="com.hqs.springboot.entity.SysModule">
+        SELECT * from test where id = #{id}
+    </select>
+</mapper>

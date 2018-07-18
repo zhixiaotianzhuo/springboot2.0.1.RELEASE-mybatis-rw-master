@@ -1,6 +1,6 @@
 package com.hqs.springboot.config;
 
-import com.hqs.springboot.beans.DatabaseType;
+import com.hqs.springboot.constants.DatabaseType;
 
 /**
  * 保存一个线程安全的DatabaseType容器

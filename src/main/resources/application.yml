@@ -67,6 +67,13 @@ logging:
 #            WARN
 
 
+shiro:
+    cas-login-url: https://casdev.mioffice.cn/login
+    login-successful-url: /auth/user/list
+    login-url: https://casdev.mioffice.cn/login?service=http://localhost:8090/callback?client_name=CasClient
+    shiro-server-url-prefix: http://localhost:8090
+    unauthorized-url: /unauthorized
+    logout-url: https://casdev.mioffice.cn/logout
 
 ---
 
@@ -107,3 +114,11 @@ logging:
 #        root:
 #            WARN
 
+
+shiro:
+    cas-login-url: https://casdev.mioffice.cn/login
+    login-successful-url: /auth/user/list
+    login-url: https://casdev.mioffice.cn/login?service=http://localhost:8090/callback?client_name=CasClient
+    shiro-server-url-prefix: http://localhost:8090
+    unauthorized-url: /unauthorized
+    logout-url: https://casdev.mioffice.cn/logout

@@ -1,7 +1,7 @@
 package com.hqs.springboot.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.hqs.springboot.beans.DatabaseType;
+import com.hqs.springboot.constants.DatabaseType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;

@@ -1,6 +1,6 @@
 package com.hqs.springboot.config;
 
-import com.hqs.springboot.beans.DatabaseType;
+import com.hqs.springboot.constants.DatabaseType;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.lang.Nullable;
 
