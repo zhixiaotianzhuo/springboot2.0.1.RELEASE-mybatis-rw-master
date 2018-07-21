@@ -8,6 +8,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.ArrayList;
@@ -92,21 +94,22 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(interceptorUtil);
+        // registry.addInterceptor(interceptorUtil);
         registry.addInterceptor(logInterceptor).addPathPatterns("/**");
     }
 
 
-//    // controller 路径 ？
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/xx").setViewName("/xx");
-//    }
-//
-//    // static 附件
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-//    }
+    // controller 路径 ？
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/xx").setViewName("/xx");
+    }
+
+    // static 附件
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("/resources/");
+    }
 
 }
