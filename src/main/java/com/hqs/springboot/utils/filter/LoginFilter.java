@@ -18,7 +18,14 @@ public class LoginFilter extends AuthorizationFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 
-
+    /**
+     * 是否允许访问，返回true表示允许
+     * @param request
+     * @param response
+     * @param o
+     * @return
+     * @throws Exception
+     */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object o) throws Exception {
         HttpServletRequest req = (HttpServletRequest) request;
@@ -35,14 +42,28 @@ public class LoginFilter extends AuthorizationFilter {
                 url.startsWith("/home")) {
             return true;
         }
+
         return isLogin(request, response);
     }
 
+    /**
+     * 访问拒绝时是否自己处理，如果返回true表示自己不处理且继续拦截器链执行，返回false表示自己已经处理了（比如重定向到另一个页面）。
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
-        redirectToLogin(request, response);
+        redirectToLogin(request, response); // 重定向到登录页面
         return false;
     }
+
+//    @Override
+//    public void destroy() {
+//        CallContext.setEndTime();
+//        super.destroy();
+//    }
 
     private boolean isLogin(ServletRequest request, ServletResponse response) {
         Subject subject = getSubject(request, response);

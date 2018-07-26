@@ -3,6 +3,7 @@ package com.hqs.springboot.constants;
 import com.hqs.springboot.controller.TestController;
 import com.hqs.springboot.entity.SysUser;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class CallContext {
 
     private static final Logger logger = LoggerFactory.getLogger(CallContext.class);
-    public static final String CUR_USER = "cur_user";
+
 
     private static InheritableThreadLocal<Long> BEGIN_TIME = new InheritableThreadLocal<>();
 
@@ -22,8 +23,9 @@ public class CallContext {
     public static SysUser getCurUser() {
         SysUser sysUser = new SysUser();
         try {
-            if(SecurityUtils.getSubject().getSession().getAttribute(CUR_USER) != null) {
-                sysUser = (SysUser) SecurityUtils.getSubject().getSession().getAttribute(CUR_USER);
+            Subject s = SecurityUtils.getSubject();
+            if(SecurityUtils.getSubject().getSession().getAttribute(Constants.CUR_USER) != null) {
+                sysUser = (SysUser) SecurityUtils.getSubject().getSession().getAttribute(Constants.CUR_USER);
             }
         } catch (Exception e) {
             logger.warn(String.format("CallContext getCurrentUserId failed:%s", e.getMessage()));
@@ -43,5 +45,7 @@ public class CallContext {
     public static long getCostTimeMillis(){
         return (END_TIME.get() - BEGIN_TIME.get()) / 1000000;
     }
+
+
 
 }

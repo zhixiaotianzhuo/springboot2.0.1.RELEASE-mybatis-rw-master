@@ -18,7 +18,6 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     static final Map<DatabaseType, List<String>> METHOD_TYPE_MAP = new HashMap<>();
 
-
     /**
      * 启动时返回 数据库操作类型 - 读/写
      * @return

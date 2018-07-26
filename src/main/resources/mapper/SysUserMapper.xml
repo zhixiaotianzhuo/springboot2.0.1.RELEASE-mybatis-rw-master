@@ -30,7 +30,7 @@
     <!--</select>-->
 
     <select id="selectByEmail" parameterType="String" resultType="com.hqs.springboot.entity.SysUser">
-        select id, name, email
+        select *
         from sys_user
         where email=#{email}
     </select>

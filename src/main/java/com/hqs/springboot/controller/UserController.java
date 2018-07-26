@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by Manu on 2018/7/19.
  */
 @RestController
-@RequestMapping(value = "/auth" )
+@RequestMapping(value = "/auth"  ,produces = "application/json;charset=UTF-8")
 public class UserController {
 
 

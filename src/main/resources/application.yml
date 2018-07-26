@@ -60,7 +60,7 @@ mapper:
 aop:
     proxy-target-class: true
 logging:
-    config: classpath:logback.xml
+    config: classpath:log4j2.xml
     #path: d:/logs
 #    level:
 #        root:
@@ -69,11 +69,14 @@ logging:
 
 shiro:
     cas-login-url: https://casdev.mioffice.cn/login
-    login-successful-url: /auth/user/list
+#    login-successful-url: /auth/user/list
+    login-successful-url: /index
     login-url: https://casdev.mioffice.cn/login?service=http://localhost:8090/callback?client_name=CasClient
     shiro-server-url-prefix: http://localhost:8090
     unauthorized-url: /unauthorized
     logout-url: https://casdev.mioffice.cn/logout
+    session-timeout: 14400000
+    session-validation-scheduler-interval: 3600000
 
 ---
 
@@ -108,7 +111,7 @@ mapper:
 aop:
     proxy-target-class: true
 logging:
-    config: classpath:logback.xml
+    config: classpath:log4j2.xml
     #path: d:/logs
 #    level:
 #        root:
@@ -117,8 +120,11 @@ logging:
 
 shiro:
     cas-login-url: https://casdev.mioffice.cn/login
-    login-successful-url: /auth/user/list
+#    login-successful-url: /auth/user/list
+    login-successful-url: /index
     login-url: https://casdev.mioffice.cn/login?service=http://localhost:8090/callback?client_name=CasClient
     shiro-server-url-prefix: http://localhost:8090
     unauthorized-url: /unauthorized
     logout-url: https://casdev.mioffice.cn/logout
+    session-timeout: 14400000
+    session-validation-scheduler-interval: 3600000

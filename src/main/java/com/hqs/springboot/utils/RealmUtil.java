@@ -3,6 +3,7 @@ package com.hqs.springboot.utils;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.hqs.springboot.constants.CallContext;
+import com.hqs.springboot.constants.Constants;
 import com.hqs.springboot.entity.SysModule;
 import com.hqs.springboot.entity.SysUser;
 import com.hqs.springboot.mapper.SysModuleMapper;
@@ -18,10 +19,16 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.pac4j.core.profile.CommonProfile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedHashMap;
@@ -33,10 +40,16 @@ import java.util.List;
 @Component
 public class RealmUtil extends Pac4jRealm {
 
+    // 添加 @Component 注解，对象的生命周期将交由 Spring 接管 - 对象级别的 autowired 方可使用
+
+    private final static Logger logger = LoggerFactory.getLogger(RealmUtil.class);
+
     @Autowired
     private SysUserMapper sysUserMapper;
     @Autowired
     private SysModuleMapper sysModuleMapper;
+    @Value("${shiro.session-timeout}")
+    private Integer sessionTimeout;
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
@@ -94,15 +107,31 @@ public class RealmUtil extends Pac4jRealm {
             info.addStringPermissions(permissions);
 
             Session session = SecurityUtils.getSubject().getSession();
-            session.setTimeout(-1000l);
+            session.setTimeout(sessionTimeout);
 
-            if(session.getAttribute(CallContext.CUR_USER) == null) {
-                session.setAttribute(CallContext.CUR_USER, currentUser);
+            if(session.getAttribute(Constants.CUR_USER) == null) {
+                session.setAttribute(Constants.CUR_USER, currentUser);
             }
 
         }
-
         return info;
+    }
+
+
+    //清除缓存
+    public void clearCached(List<String> userEmails){
+        Subject subject = SecurityUtils.getSubject();
+        String realmName = subject.getPrincipals().getRealmNames().iterator().next();
+        RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
+        for (String userEmail: userEmails){
+            logger.info("oper.user="+userEmail+",login.user="+SecurityUtils.getSubject().getPrincipal().toString());
+            SimplePrincipalCollection principals = new SimplePrincipalCollection(userEmail,realmName);
+            subject.runAs(principals);
+            logger.info(subject.getPrincipal().toString());
+            this.getAuthorizationCache().remove(subject.getPrincipals());
+            this.getAuthorizationCache().remove(userEmail);
+            subject.releaseRunAs();
+        }
     }
 
 }

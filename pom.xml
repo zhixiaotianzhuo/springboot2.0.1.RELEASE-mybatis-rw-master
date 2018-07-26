@@ -22,10 +22,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<logback.version>1.1.7</logback.version>
+		<!--<logback.version>1.1.7</logback.version>-->
 		<shiro.version>1.4.0</shiro.version>
 		<pac4j.version>2.1.0</pac4j.version>
 		<lombok.version>1.16.18</lombok.version>
+		<zookeeper_host>staging</zookeeper_host>
+		<zookeeper_use>true</zookeeper_use>
 	</properties>
 
 	<dependencies>
@@ -95,16 +97,16 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>ch.qos.logback</groupId>-->
+			<!--<artifactId>logback-classic</artifactId>-->
+			<!--<version>${logback.version}</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>ch.qos.logback</groupId>-->
+			<!--<artifactId>logback-core</artifactId>-->
+			<!--<version>${logback.version}</version>-->
+		<!--</dependency>-->
 
 		<!-- shiro spring. -->
 		<dependency>
@@ -173,17 +175,44 @@
 		</dependency>
 
 
+		<!--thymeleaf-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-    </dependencies>
+
+		<!--log4j-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+
+
+		<!--配置Redis缓存-->
+		<dependency>
+			<groupId>com.xiaomi</groupId>
+			<artifactId>miui-ad-infra-cacheclient</artifactId>
+			<version>0.3.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+
+	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork> <!--热部署必添选项-->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

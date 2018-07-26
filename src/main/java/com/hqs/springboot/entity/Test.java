@@ -7,6 +7,7 @@ public class Test {
     private int id;
     private String name;
     private String note;
+    private String noteTime;
 
     public int getId() {
         return id;
@@ -30,6 +31,14 @@ public class Test {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getNoteTime() {
+        return noteTime;
+    }
+
+    public void setNoteTime(String noteTime) {
+        this.noteTime = noteTime;
     }
 
     @Override

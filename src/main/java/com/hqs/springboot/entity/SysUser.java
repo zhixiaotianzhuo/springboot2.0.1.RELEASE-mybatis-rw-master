@@ -1,12 +1,14 @@
 package com.hqs.springboot.entity;
 
 import lombok.Data;
+
+import java.io.Serializable;
 import java.util.Date;
 /**
  * Created by Manu on 2018/7/17.
  */
 @Data
-public class SysUser {
+public class SysUser implements Serializable {
     private Long id;
 
     private String name;
